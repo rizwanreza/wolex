@@ -2,8 +2,11 @@ require 'helper'
 
 module Wolex
   describe 'scanner' do
-    it 'should scan number' do
+    before do
       scanner = Wolex::Scanner.new
+    end
+    
+    it 'should scan number' do
       scanner.scan_setup '10'
       scanner.next_token.must_equal [:NUMBER, 10]
     end
