@@ -4,7 +4,7 @@ class Scanner
 macro
   number    \d+
   add      \+
-  subtract      \-
+  subtract  \-
   multiply  \*
   divide    \/
   blank     [\ \t]+
@@ -17,5 +17,6 @@ rule
             {subtract}  { [:SUBTRACT, text] }
             {multiply}  { [:MULTIPLY, text] }
             {divide}  { [:DIVIDE, text] }
+            {blank}   { [:BLANK, text]}
 end
 end

@@ -47,9 +47,24 @@ module Wolex
 
     it 'should scan division sign' do
       scanner = Wolex::Scanner.new
-      scanner.scan_setup '1/'
+      scanner.scan_setup '1 /'
       scanner.next_token.must_equal [:NUMBER, 1]
+      scanner.next_token.must_equal [:BLANK, " "]
       scanner.next_token.must_equal [:DIVIDE, "/"]
+    end
+    
+    it 'should scan whitespace' do
+      scanner = Wolex::Scanner.new
+      scanner.scan_setup '4 / 2 + 4'
+      scanner.next_token.must_equal [:NUMBER, 4]
+      scanner.next_token.must_equal [:BLANK, " "]
+      scanner.next_token.must_equal [:DIVIDE, "/"]
+      scanner.next_token.must_equal [:BLANK, " "]
+      scanner.next_token.must_equal [:NUMBER, 2]
+      scanner.next_token.must_equal [:BLANK, " "]
+      scanner.next_token.must_equal [:ADD, "+"]
+      scanner.next_token.must_equal [:BLANK, " "]
+      scanner.next_token.must_equal [:NUMBER, 4]
     end
   end
 end
